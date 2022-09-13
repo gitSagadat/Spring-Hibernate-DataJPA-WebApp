@@ -1,6 +1,7 @@
 package io.saga.dataJPA.services;
 
 import io.saga.dataJPA.models.Person;
+import io.saga.dataJPA.models.Status;
 import io.saga.dataJPA.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ public class PeopleService {
 
     @Transactional
     public void save( Person person){
+        person.setStatus(Status.ONLINE);
         person.setCreatedAt(new Date());
         peopleRepository.save(person);
     }

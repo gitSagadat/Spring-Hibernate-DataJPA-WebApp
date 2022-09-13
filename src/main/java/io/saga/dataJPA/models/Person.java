@@ -48,6 +48,9 @@ public class Person {
     @DateTimeFormat(pattern = "dd/MM/yyyy")   // <- format day.month.year like a 22.01.2022
     private Date createdAt;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     public Person() {
 
     }
@@ -93,6 +96,8 @@ public class Person {
     public void setDateOfBirth(Date dateOfBirth) {this.dateOfBirth = dateOfBirth;}
     public Date getCreatedAt() {return createdAt;}
     public void setCreatedAt(Date createdAt) {this.createdAt = createdAt;}
+    public Status getStatus() {return status;}
+    public void setStatus(Status status) {this.status = status;}
 
     @Override
     public String toString() {
