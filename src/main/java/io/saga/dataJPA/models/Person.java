@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Sagadat Kuandykov
@@ -39,7 +40,7 @@ public class Person {
     @OneToMany(mappedBy = "owner")
     private List<Item> items;
 
-    @Column(name ="date_of_birth")
+    @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
@@ -58,7 +59,7 @@ public class Person {
     public Person(String name, int age, String email) {
         this.name = name;
         this.age = age;
-        this.email=email;
+        this.email = email;
     }
 
     public int getId() {
@@ -85,19 +86,45 @@ public class Person {
         this.age = age;
     }
 
-    public String getEmail() {return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public void setEmail(String email) {this.email = email;}
-    public List<Item> getItems() {return items;}
-    public void setItems(List<Item> items) {this.items = items;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public Date getDateOfBirth() {return dateOfBirth;}
+    public List<Item> getItems() {
+        return items;
+    }
 
-    public void setDateOfBirth(Date dateOfBirth) {this.dateOfBirth = dateOfBirth;}
-    public Date getCreatedAt() {return createdAt;}
-    public void setCreatedAt(Date createdAt) {this.createdAt = createdAt;}
-    public Status getStatus() {return status;}
-    public void setStatus(Status status) {this.status = status;}
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -106,5 +133,18 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id == person.id && age == person.age && Objects.equals(name, person.name) && Objects.equals(email, person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age, email);
     }
 }

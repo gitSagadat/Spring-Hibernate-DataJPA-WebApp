@@ -1,5 +1,6 @@
 package io.saga.dataJPA.controllers;
 
+import io.saga.dataJPA.dao.PersonDAO;
 import io.saga.dataJPA.models.Person;
 import io.saga.dataJPA.services.ItemService;
 import io.saga.dataJPA.services.PeopleService;
@@ -21,15 +22,18 @@ public class PeopleController {
 
     private final PeopleService peopleService;
     private final ItemService itemService;
+    private final PersonDAO personDAO;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, ItemService itemService) {
+    public PeopleController(PeopleService peopleService, ItemService itemService, PersonDAO personDAO) {
         this.peopleService = peopleService;
         this.itemService = itemService;
+        this.personDAO = personDAO;
     }
 
     @GetMapping()
     public String index(Model model) {
+        personDAO.testNPlus1();
         model.addAttribute("people", peopleService.findAll());
 
         itemService.findByItemName("Macbook");
